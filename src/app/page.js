@@ -1,48 +1,24 @@
-"use client";
-import { useState } from 'react';
-//import Image from 'next/image'
-//import styles from './page.module.css'
-import Modal from './modal';
-import Form from './form';
+import './styles.css';
 
 export default function Page() {
-  /*const [isModal1Open, setIsModal1Open] = useState(true);
-  const [isModal2Open, setIsModal2Open] = useState(false);
-  const [isModal3Open, setIsModal3Open] = useState(false);
-  const [isModal4Open, setIsModal4Open] = useState(false);
-  const [isModal5Open, setIsModal5Open] = useState(false);
-  
-
-  const closeModal1AndOpenModal2 = () => {
-    setIsModal1Open(false);
-    setIsModal2Open(true);
-  }
-
-  const closeModal2AndOpenModal3 = () => {
-    setIsModal2Open(false);
-    setIsModal3Open(true);
-  }
-
-  const closeModal3AndOpenModal4 = () => {
-    setIsModal3Open(false);
-    setIsModal4Open(true);
-  }
-
-  const closeModal4AndOpenModal5 = () => {
-    setIsModal4Open(false);
-    setIsModal5Open(true);
-  }
-
-  const closeModal5 = () => {
-    setIsModal5Open(false);
-  }
-  */
-
   return (
     <div>
-      <Modal>
-        <Form />
-      </Modal>
+      <h1>Welcome to My Page</h1>
+      <p>This is a simple example of a static page in a Next.js application.</p>
+
+      <section>
+        <h2>Some Section</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum purus diam, at facilisis quam.</p>
+      </section>
+
+      <section>
+        <h2>Another Section</h2>
+        <p>Vestibulum id neque ut lacus laoreet interdum ut eget nibh. Nunc aliquam nulla non diam volutpat, in tristique mi convallis.</p>
+      </section>
+
+      <footer>
+        <p>Thank you for visiting my page!</p>
+      </footer>
     </div>
-  );
+  )
 }
