@@ -7,11 +7,11 @@ body {
 
 h2 {
   color: black;
-  font-size: 250%;
+  font-size: 300%;
 }
 h3 {
   color: rgb(229, 79, 78);
-  font-size: 150%;
+  font-size: 200%;
 }
 
 .floaterLogo {
@@ -24,7 +24,7 @@ h3 {
 }
 .floaterScroll {
   position: fixed;
-  bottom: 5%;
+  bottom: -3vw;
   left: 44%;
 }
 .floaterScroll img{
@@ -46,21 +46,63 @@ h3 {
 }
 section{
   scroll-snap-align: center;
-  margin-top: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-bottom: 50%;
-  padding: 40px 40px;
+  margin-top: 50vh;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  margin-bottom: 50vh;
+  padding: 2vw 2vw;
   border-radius: 4px;
   background-color: rgb(246, 202, 69);
-  background-color: rgb(220, 220, 220);
+  background-color: rgb(241, 241, 241);
   text-align: center;
   align-items: flex;
 }
 section p{
   color: rgb(34, 34, 34);
+  font-size: 100%;
 }
 section input{
   width: 80%;
-  font-size: 100%;
+  font-size: 150%;
+  color:rgb(0, 0, 0);
+}
+.submitButton{
+  scroll-snap-align: center;
+  margin-top: 0vh;
+  margin-left: 40vw;
+  margin-right: 40vw;
+  margin-bottom: 30vh;
+  border-radius: 5px;
+  padding: 2%;
+  width: 20vw;
+  font-size: 200%;
+  background-color: rgb(229, 79, 78);
+  color: whitesmoke;
+  border: 2px solid;
+  cursor: pointer;
+}
+footer {
+  scroll-snap-align: center;
+  height: 30vh;
+  background-color: rgb(156, 156, 156);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+footer a {
+  color: whitesmoke;
+  font-size: large;
+  font-weight: bold;
+}
+footer > *:hover{
+  text-decoration: underline;
+  text-decoration-color: rgb(229, 79, 78);
+  cursor: pointer;
+}
+@media screen and (orientation:portrait) {
+  section{
+    margin-right: 10%;
+    margin-left: 10%;
+  }
 }
