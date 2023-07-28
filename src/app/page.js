@@ -1,16 +1,17 @@
-import Image from 'next/image'
-import styles from './page.module.css'
-
+"use client";
+import { useState } from 'react';
+//import Image from 'next/image'
+//import styles from './page.module.css'
 import Modal from './modal';
 import Form from './form';
-import { useState } from 'react';
 
-
-export default function Home() {
-  const [isModal1Open, setIsModal1Open] = useState(true);
+export default function Page() {
+  /*const [isModal1Open, setIsModal1Open] = useState(true);
   const [isModal2Open, setIsModal2Open] = useState(false);
   const [isModal3Open, setIsModal3Open] = useState(false);
-  // ... repeat for all modals
+  const [isModal4Open, setIsModal4Open] = useState(false);
+  const [isModal5Open, setIsModal5Open] = useState(false);
+  
 
   const closeModal1AndOpenModal2 = () => {
     setIsModal1Open(false);
@@ -22,19 +23,26 @@ export default function Home() {
     setIsModal3Open(true);
   }
 
-  // ... repeat for all modals
+  const closeModal3AndOpenModal4 = () => {
+    setIsModal3Open(false);
+    setIsModal4Open(true);
+  }
+
+  const closeModal4AndOpenModal5 = () => {
+    setIsModal4Open(false);
+    setIsModal5Open(true);
+  }
+
+  const closeModal5 = () => {
+    setIsModal5Open(false);
+  }
+  */
 
   return (
     <div>
-      <Modal open={isModal1Open} onClose={closeModal1AndOpenModal2}>
-        <Form onClose={closeModal1AndOpenModal2} />
+      <Modal>
+        <Form />
       </Modal>
-
-      <Modal open={isModal2Open} onClose={closeModal2AndOpenModal3}>
-        <Form onClose={closeModal2AndOpenModal3} />
-      </Modal>
-
-      // ... repeat for all modals
     </div>
   );
 }
