@@ -22,6 +22,10 @@ h3 {
 .floaterLogo img{
   height: 10vh;
 }
+.progressBar{
+  position: fixed;
+  top: 4vh;
+}
 .floaterScroll{
   position: fixed;
   bottom: 2vw;

@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import {insertData} from './databaseOperations';
+const {getChatResponse} = require('./gpt.js');
+
 
 export default function Page() {
   const [topic, setTopic] = useState('');
@@ -8,10 +10,13 @@ export default function Page() {
   const [essay_type, setEssayType] = useState('');
   const [reference_piece, setReference] = useState('');
   const [additional_features, setInstructions] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Convert the form data into a JSON object then log it
-  const handleSubmit = (e) => {
+  // TODO change the values back
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    
     const formData = {
       'topic': topic,
       'school_class': school_class,
@@ -20,11 +25,21 @@ export default function Page() {
       'additional_features': additional_features
     };
 
-    // Used to display data on the web page
     document.getElementById("demo").innerText = JSON.stringify(formData);
 
-    insertData(formData.topic, formData.school_class, formData.essay_type, formData.reference_piece, formData.additional_features)
-    
+    // Before sending data to database, call getChatResponse
+    try{
+        const thesis_system_prompt = "You are an essay outlining expert, that can take in user inputs and craft a well written theis for an assignment.";
+        const thesis_user_prompt = "User inputs below: \n"+ JSON.stringify(formData)+"\n please craft a thesis or main idea";
+        const response = await getChatResponse(thesis_system_prompt, thesis_user_prompt);
+        console.log(response);
+        // Then insert data to database
+        await insertData(formData);
+    } catch (err) {
+        console.error('An error occurred:', err);
+    } finally {
+        setIsLoading(false);
+    }
   };
 
 
@@ -98,7 +113,7 @@ export default function Page() {
       </section>
 
       <form onSubmit={handleSubmit}>
-        <button type="submit" className="submitButton">Submit</button>
+        <button type="submit" className="submitButton" disabled={isLoading}>{isLoading ? 'Loading...' : 'Submit'}</button>
       </form>
 
       <p id="demo"></p>
