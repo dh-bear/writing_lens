@@ -22,13 +22,21 @@ h3 {
 .floaterLogo img{
   height: 10vh;
 }
-.floaterScroll {
+.floaterScroll{
   position: fixed;
-  bottom: -3vw;
-  left: 44%;
+  bottom: 2vw;
+  left: 48%;
+  width: 6vw;
+  height: 4vw;
+  background-color: rgb(237, 237, 237);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .floaterScroll img{
-  width: 12vw;
+  width: 100%;
+  margin-left:-5%;
 }
 .title{
   margin-top: 40%;
