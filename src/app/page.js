@@ -21,7 +21,7 @@ export default function Page() {
     };
 
     // Used to display data on the web page
-    document.getElementById("demo").innerText = JSON.stringify(formData.topic);
+    document.getElementById("demo").innerText = JSON.stringify(formData);
 
     insertData(formData.topic, formData.school_class, formData.essay_type, formData.reference_piece, formData.additional_features)
     
