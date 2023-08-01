@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/page.client.js"]
+      "@/*": ["./src/*"]
     }
   }
 }
