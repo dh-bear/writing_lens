@@ -2,7 +2,7 @@ import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
     organization: "org-4VnBH7F43k5fSchEhWpLxMB0",
-    apiKey: "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",
+    apiKey: "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",
 });
 
 const openai = new OpenAIApi(configuration);
@@ -17,7 +17,7 @@ async function getChatResponse(userMessage, systemMessage) {
       ],
     });
     
-    return completion.data.choices[0].message;
+    return completion.data.choices[0].message.content;
   }
   
   module.exports = {

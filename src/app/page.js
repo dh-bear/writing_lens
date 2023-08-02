@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import {insertData} from './databaseOperations';
-const {getChatResponse} = require('./gpt.js');
 
 
 export default function Page() {
@@ -18,32 +17,21 @@ export default function Page() {
     setIsLoading(true);
     
     const formData = {
-      'topic': topic,
-      'school_class': school_class,
-      'essay_type': essay_type,
-      'reference_piece': reference_piece,
-      'additional_features': additional_features
+      'topic': "american dream", //topic,
+      'school_class': "ap lit", //school_class,
+      'essay_type': "theme analysis",//essay_type,
+      'reference_piece': "gatsby",//reference_piece,
+      'additional_features': "none",//additional_features
     };
-
-    document.getElementById("demo").innerText = JSON.stringify(formData);
-
-    // Before sending data to database, call getChatResponse
     try{
-        const thesis_system_prompt = "You are an essay outlining expert, that can take in user inputs and craft a well written theis for an assignment.";
-        const thesis_user_prompt = "User inputs below: \n"+ JSON.stringify(formData)+"\n please craft a thesis or main idea";
-        const response = await getChatResponse(thesis_system_prompt, thesis_user_prompt);
-        console.log(response);
-        // Then insert data to database
-        await insertData(formData);
-    } catch (err) {
-        console.error('An error occurred:', err);
-    } finally {
-        setIsLoading(false);
+      insertData(formData);
+    }catch(e){
+      console.log("Error: ",e)
+    }finally{
+      setIsLoading(false);
     }
   };
 
-
-  
 
   return (
     <div>
@@ -116,7 +104,20 @@ export default function Page() {
         <button type="submit" className="submitButton" disabled={isLoading}>{isLoading ? 'Loading...' : 'Submit'}</button>
       </form>
 
-      <p id="demo"></p>
+      <section id="thesisSection">
+        <h4>Thesis</h4>
+        <p id="thesisText"></p>
+      </section>
+
+      <section id="pointsSection">
+        <h4>Supporting Points</h4>
+        <p id="pointsText"></p>
+      </section>
+
+      <section id="outlineSection">
+        <h4>Outline</h4>
+        <p id="outlineText"></p>
+      </section>
 
     <footer>
         <a href="https://apps.apple.com/us/app/studdy-ai-pocket-tutor/id6450114499">Studdy</a>

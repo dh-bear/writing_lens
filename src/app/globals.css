@@ -118,3 +118,13 @@ footer > *:hover{
     margin-left: 10%;
   }
 }
+
+#thesisSection{
+  display: none;
+}
+#pointsSection{
+  display: none;
+}
+#outlineSection{
+  display: none;
+}
