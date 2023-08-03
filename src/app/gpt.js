@@ -1,8 +1,9 @@
+require('dotenv').config()
 import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
-    organization: "org-4VnBH7F43k5fSchEhWpLxMB0",
-    apiKey: "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",
+    organization: process.env.OPEN_AI_ORG,
+    apiKey: process.env.OPEN_AI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -15,6 +16,7 @@ async function getChatResponse(userMessage, systemMessage) {
         {"role": "system", "content": systemMessage}, 
         {"role": "user", "content": userMessage}
       ],
+      temperature: 1
     });
     
     return completion.data.choices[0].message.content;
