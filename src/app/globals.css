@@ -24,7 +24,11 @@ h3 {
 }
 .progressBar{
   position: fixed;
-  top: 4vh;
+  top: 5%;
+  left: 5%;
+}
+.progressBar img{
+  height: 10vh;
 }
 .floaterScroll{
   position: fixed;
@@ -119,6 +123,15 @@ footer > *:hover{
   }
 }
 
+#outputSection {
+  display: none;
+  background-color: rgb(246, 202, 69);
+}
+#outputSection p{
+  background-color: azure;
+  border-radius: 5px;
+  padding: 20px 20px;
+}
 #thesisSection{
   display: none;
 }
