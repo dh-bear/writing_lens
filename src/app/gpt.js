@@ -1,5 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
-var key = require("/Users/danielhadar/Desktop/Studdy GUIs/writing_lens_proto/writing_lens/key.js");
+var key = require("./key.js");
 const configuration = new Configuration({
     apiKey: key.openai,
 });

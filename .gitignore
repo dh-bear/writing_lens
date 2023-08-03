@@ -35,4 +35,4 @@ yarn-error.log*
 next-env.d.ts
 
 #key
-key.js
+src/key.js
