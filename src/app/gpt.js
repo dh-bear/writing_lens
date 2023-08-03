@@ -1,5 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
-var key = require("./key.js");
+var key = require("../../key.js");
 const configuration = new Configuration({
     apiKey: key.openai,
 });
