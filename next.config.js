@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-
+/*
 module.exports = {
     async rewrites() {
       return [
@@ -12,7 +12,7 @@ module.exports = {
     },
   }
 
-/**
+
  * const nextConfig = {}
  * module.exports = nextConfig
 */

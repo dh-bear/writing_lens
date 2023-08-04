@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import {insertData} from './databaseOperations';
-
+import { insertData, chatGPT} from './utils';
+import {getThesis, getPoints, getOutline} from './databaseOperations';
 
 export default function Page() {
   const [topic, setTopic] = useState('');
@@ -25,6 +25,7 @@ export default function Page() {
     };
     try{
       insertData(formData);
+      getThesis(formData);
     }catch(e){
       console.log("Error: ",e)
     }
