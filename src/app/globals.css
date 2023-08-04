@@ -51,6 +51,9 @@ h3 {
   scroll-snap-align: center;
   text-align: center;
 }
+.title img{
+  width: 10%;
+}
 .title h1{
   /*color: rgb(246, 202, 69);*/
   font-size: 500%;

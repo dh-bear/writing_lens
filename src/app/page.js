@@ -17,11 +17,11 @@ export default function Page() {
     setIsLoading(true);
     
     const formData = {
-      'topic': "american dream", //topic,
-      'school_class': "ap lit", //school_class,
-      'essay_type': "theme analysis",//essay_type,
-      'reference_piece': "gatsby",//reference_piece,
-      'additional_features': "none",//additional_features
+      'topic': topic,
+      'school_class': school_class,
+      'essay_type': essay_type,
+      'reference_piece': reference_piece,
+      'additional_features': additional_features
     };
     try{
       insertData(formData);
@@ -46,11 +46,12 @@ export default function Page() {
       </div>
 
       <div className="progressBar">
-        <img src="/writing_lens.png" />
+        <img src="/question.png" />
       </div>
 
       <div className="title">
         <h1>Writing Lens</h1>
+        <img src="/writing_lens.png" />
         <p><b>Daniel Hadar, StuddyAI Inc.</b></p>
         <p><b>A Full-Stack Prototype</b></p>
       </div>
