@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { insertData, chatGPT} from './utils';
-import {getThesis, getPoints, getOutline} from './databaseOperations';
+import {insertData} from './databaseOperations';
+
 
 export default function Page() {
   const [topic, setTopic] = useState('');
@@ -17,17 +17,18 @@ export default function Page() {
     setIsLoading(true);
     
     const formData = {
-      'topic': topic,
-      'school_class': school_class,
-      'essay_type': essay_type,
-      'reference_piece': reference_piece,
-      'additional_features': additional_features
+      'topic': "american dream", //topic,
+      'school_class': "ap lit", //school_class,
+      'essay_type': "theme analysis",//essay_type,
+      'reference_piece': "gatsby",//reference_piece,
+      'additional_features': "none",//additional_features
     };
     try{
       insertData(formData);
-      getThesis(formData);
     }catch(e){
       console.log("Error: ",e)
+    }finally{
+      setIsLoading(false);
     }
   };
 
@@ -46,14 +47,12 @@ export default function Page() {
       </div>
 
       <div className="progressBar">
-        <img src="/question.png" />
+        <p>Placeholder</p>
       </div>
 
       <div className="title">
         <h1>Writing Lens</h1>
-        <img src="/writing_lens.png" />
         <p><b>Daniel Hadar, StuddyAI Inc.</b></p>
-        <p><b>A Full-Stack Prototype</b></p>
       </div>
 
       <section>
@@ -102,24 +101,22 @@ export default function Page() {
       </section>
 
       <form onSubmit={handleSubmit}>
-        <button type="submit" id="submitButton" className="submitButton" disabled={isLoading}>{isLoading ? 'Loading...' : 'Submit'}</button>
+        <button type="submit" className="submitButton" disabled={isLoading}>{isLoading ? 'Loading...' : 'Submit'}</button>
       </form>
 
-      <section id="outputSection">
-        <div id="thesisSection">
-          <h4>Thesis</h4>
-          <p id="thesisText"></p>
-        </div>
+      <section id="thesisSection">
+        <h4>Thesis</h4>
+        <p id="thesisText"></p>
+      </section>
 
-        <div id="pointsSection">
-          <h4>Supporting Points</h4>
-          <p id="pointsText"></p>
-        </div>
+      <section id="pointsSection">
+        <h4>Supporting Points</h4>
+        <p id="pointsText"></p>
+      </section>
 
-        <div id="outlineSection">
-          <h4>Outline</h4>
-          <p id="outlineText"></p>
-        </div>
+      <section id="outlineSection">
+        <h4>Outline</h4>
+        <p id="outlineText"></p>
       </section>
 
     <footer>
