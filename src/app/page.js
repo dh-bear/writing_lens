@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import {insertData} from './databaseOperations';
-
+import { insertData, chatGPT} from './utils';
+import {getThesis, getPoints, getOutline} from './databaseOperations';
 
 export default function Page() {
   const [topic, setTopic] = useState('');
@@ -25,10 +25,9 @@ export default function Page() {
     };
     try{
       insertData(formData);
+      getThesis(formData);
     }catch(e){
       console.log("Error: ",e)
-    }finally{
-      setIsLoading(false);
     }
   };
 
@@ -47,12 +46,13 @@ export default function Page() {
       </div>
 
       <div className="progressBar">
-        <p>Placeholder</p>
+        <img src="/writing_lens.png" />
       </div>
 
       <div className="title">
         <h1>Writing Lens</h1>
         <p><b>Daniel Hadar, StuddyAI Inc.</b></p>
+        <p><b>A Full-Stack Prototype</b></p>
       </div>
 
       <section>
@@ -101,22 +101,24 @@ export default function Page() {
       </section>
 
       <form onSubmit={handleSubmit}>
-        <button type="submit" className="submitButton" disabled={isLoading}>{isLoading ? 'Loading...' : 'Submit'}</button>
+        <button type="submit" id="submitButton" className="submitButton" disabled={isLoading}>{isLoading ? 'Loading...' : 'Submit'}</button>
       </form>
 
-      <section id="thesisSection">
-        <h4>Thesis</h4>
-        <p id="thesisText"></p>
-      </section>
+      <section id="outputSection">
+        <div id="thesisSection">
+          <h4>Thesis</h4>
+          <p id="thesisText"></p>
+        </div>
 
-      <section id="pointsSection">
-        <h4>Supporting Points</h4>
-        <p id="pointsText"></p>
-      </section>
+        <div id="pointsSection">
+          <h4>Supporting Points</h4>
+          <p id="pointsText"></p>
+        </div>
 
-      <section id="outlineSection">
-        <h4>Outline</h4>
-        <p id="outlineText"></p>
+        <div id="outlineSection">
+          <h4>Outline</h4>
+          <p id="outlineText"></p>
+        </div>
       </section>
 
     <footer>

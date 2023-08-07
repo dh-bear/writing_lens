@@ -16,7 +16,7 @@ async function getChatResponse(userMessage, systemMessage) {
       ],
       temperature: 1,
     });
-    
+
     return completion.data.choices[0].message.content;
 }
 
