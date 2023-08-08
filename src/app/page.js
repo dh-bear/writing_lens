@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import {insertData} from './databaseOperations';
-
+import { insertData } from './utils';
+import {getThesis, getPoints, getOutline} from './databaseOperations';
 
 export default function Page() {
   const [topic, setTopic] = useState('');
@@ -10,28 +10,41 @@ export default function Page() {
   const [reference_piece, setReference] = useState('');
   const [additional_features, setInstructions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
 
   // TODO change the values back
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
     const formData = {
-      'topic': "american dream", //topic,
-      'school_class': "ap lit", //school_class,
-      'essay_type': "theme analysis",//essay_type,
-      'reference_piece': "gatsby",//reference_piece,
-      'additional_features': "none",//additional_features
+      'topic': (topic == "") ? "Is the American Dream Possible? Did Gatsby achieve this?" : topic,
+      'school_class': (school_class == "") ? "AP Lit" : school_class,
+      'essay_type': (essay_type == "") ? "Theme Analysis" : essay_type,
+      'reference_piece': (reference_piece == "") ? "Great Gastby" : reference_piece,
+      'additional_features': (additional_features == "") ? "Relate to the social disparities of the 1920s." : additional_features,
     };
     try{
       insertData(formData);
+      getThesis(formData);
     }catch(e){
       console.log("Error: ",e)
-    }finally{
-      setIsLoading(false);
     }
   };
 
+  useEffect(() => {
+
+    const handleScroll = () => {
+      const scrollPiece = document.getElementById('floaterScroll');
+      var value1 = document.body.offsetHeight - 1000;
+      if (window.scrollY > value1) {
+          scrollPiece.style.display = 'none';
+      } else {
+          scrollPiece.style.display = 'block';
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+  });
 
   return (
     <div>
@@ -42,17 +55,18 @@ export default function Page() {
         </a>
       </div>
 
-      <div className="floaterScroll" onClick={()=>window.scrollBy(0, window.innerHeight/2)}>
+      <div id="floaterScroll" onClick={()=>window.scrollBy(0, window.innerHeight/2)}>
         <img src="/scroll-down.gif" />
       </div>
 
-      <div className="progressBar">
-        <p>Placeholder</p>
+      <div id="progressBar">
+        <img src="/writing_lens.png" />
       </div>
 
       <div className="title">
         <h1>Writing Lens</h1>
         <p><b>Daniel Hadar, StuddyAI Inc.</b></p>
+        <p><b>A Full-Stack Prototype</b></p>
       </div>
 
       <section>
@@ -101,30 +115,44 @@ export default function Page() {
       </section>
 
       <form onSubmit={handleSubmit}>
-        <button type="submit" className="submitButton" disabled={isLoading}>{isLoading ? 'Loading...' : 'Submit'}</button>
+        <button type="submit" id="submitButton" className="submitButton" disabled={isLoading}>{isLoading ? 'Loading...' : 'Submit'}</button>
       </form>
 
+      
       <section id="thesisSection">
-        <h4>Thesis</h4>
+      <h3>Main Idea</h3>
+        <div id="thesisLoading" className="loadingDiv">
+          <img src='https://emoji.slack-edge.com/T051NFX029F/studdyhappyparty/c79fcac2d48dea37.gif' />
+          <h4>Loading...</h4>
+        </div>
         <p id="thesisText"></p>
       </section>
 
       <section id="pointsSection">
-        <h4>Supporting Points</h4>
+      <h3>Supporting Ideas</h3>
+        <div id="pointsLoading" className="loadingDiv">
+          <img src='https://emoji.slack-edge.com/T051NFX029F/studdyhappyparty/c79fcac2d48dea37.gif' />
+          <h4>Loading...</h4>
+        </div>
         <p id="pointsText"></p>
       </section>
 
       <section id="outlineSection">
-        <h4>Outline</h4>
+        <h3>Outline</h3>
+        <div id="outlineLoading" className="loadingDiv">
+          <img src='https://emoji.slack-edge.com/T051NFX029F/studdyhappyparty/c79fcac2d48dea37.gif' />
+          <h4>Loading...</h4>
+        </div>
         <p id="outlineText"></p>
       </section>
-
-    <footer>
+      
+    
+    {/*<footer>
         <a href="https://apps.apple.com/us/app/studdy-ai-pocket-tutor/id6450114499">Studdy</a>
         <a href="mailto:daniel@studdy.ai">Email</a>
         <a href="https://github.com/dh-bear">GitHub</a>
         <a href="https://www.linkedin.com/in/daniel-hadar-689338253/">LinkedIn</a>
-      </footer>
+    </footer>*/}
     </div>
   )
 }
