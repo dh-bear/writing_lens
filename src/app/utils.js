@@ -1,5 +1,6 @@
 import supabase from './api/supabase';
 
+
 export async function chatGPT(system_msg, user_msg) {
     const res = await window.fetch('/api/openai', {
         method: 'POST',
@@ -44,5 +45,3 @@ export async function insertData(formData) {
       return error;
     }
 }
-
-
