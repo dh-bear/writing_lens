@@ -21,7 +21,7 @@ export default function Page() {
       'school_class': (school_class == "") ? "AP Lit" : school_class,
       'essay_type': (essay_type == "") ? "Theme Analysis" : essay_type,
       'reference_piece': (reference_piece == "") ? "Great Gastby" : reference_piece,
-      'additional_features': (additional_features == "") ? "Relate to the social disparities of the 1920s." : additional_features,
+      'additional_features': (additional_features == "") ? "Relate to the social disparities of the 1920s. Include a counterargument." : additional_features,
     };
     try{
       insertData(formData);
@@ -60,7 +60,7 @@ export default function Page() {
       </div>
 
       <div id="progressBar">
-        <img src="/writing_lens.png" />
+        <img src="/buddy.png" />
       </div>
 
       <div className="title">
@@ -73,7 +73,7 @@ export default function Page() {
         <h2>What is the topic of your essay?</h2>
         <h3>The main question it should answer</h3>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={topic} onChange={(e) => setTopic(e.target.value)} />
+          <input type="text" placeholder="ex: Is the American Dream Possible? Did Gatsby achieve this?" value={topic} onChange={(e) => setTopic(e.target.value)} />
         </form>
         {/* examples and so on */}
       </section>
@@ -82,7 +82,7 @@ export default function Page() {
         <h2>What class is this for?</h2>
         <h3>e.g., "AP COMP", "class about biology", "8th grade history"</h3>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={school_class} onChange={(e) => setClassFor(e.target.value)} />
+          <input type="text" placeholder="ex: AP LIT" value={school_class} onChange={(e) => setClassFor(e.target.value)} />
         </form>
         {/* examples and so on */}
       </section>
@@ -91,7 +91,7 @@ export default function Page() {
         <h2>Choose Essay Type</h2>
         <h3>"Theme Analysis", "Expository", "Character Analysis", "Persuasive</h3>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={essay_type} onChange={(e) => setEssayType(e.target.value)} />
+          <input type="text" placeholder="ex: Theme Analysis" value={essay_type} onChange={(e) => setEssayType(e.target.value)} />
         </form>
         {/* examples and so on */}
       </section>
@@ -100,7 +100,7 @@ export default function Page() {
         <h2>Select Reference Material</h2>
         <h3>Please refer to the name of the book, article, or passage that will be used as source material for the writing process</h3>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={reference_piece} onChange={(e) => setReference(e.target.value)} />
+          <input type="text" placeholder="ex: Great Gatsby" value={reference_piece} onChange={(e) => setReference(e.target.value)} />
         </form>
         {/* examples and so on */}
       </section>
@@ -109,7 +109,7 @@ export default function Page() {
         <h2>Any additional instructions or information</h2>
         <h3>Please include any further instruction to help direct the writing process for this assignment</h3>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={additional_features} onChange={(e) => setInstructions(e.target.value)} />
+          <input type="text" placeholder="ex: Relate to the social disparities of the 1920s. Include a counterargument." value={additional_features} onChange={(e) => setInstructions(e.target.value)} />
         </form>
         {/* examples and so on */}
       </section>

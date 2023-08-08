@@ -5,17 +5,15 @@ function loadString(step){
     return loading_embedded_div;
 }
 
-const format_instructions = 
-`Using the information provided, produce a response STRICTLY formatted in HTML 
-while maintaining the same structure, hierarchy, and emphasis as seen in the original message
-in order to inject it into the innerHTML of a p element. DO NOT INCLUDE DELIMITERS OR BACKSLASHES'`
-;
+const format_instructions_thesis = "";
+const format_instructions = "YOU ARE INJECTING AN 'innerHTML' tag, please respond in HTML";
+
 
 function updateGUI(step, step_text_content){
     document.getElementById("progressBar").innerHTML = "<img src='./buddy.png' />";
     if (step == "thesis"){
         document.getElementById('thesisLoading').style.display = "none";
-        document.getElementById("thesisText").innerHTML = step_text_content;
+        document.getElementById("thesisText").innerText = step_text_content;
         document.getElementById("thesisText").style.display = "block";
 
         document.getElementById('pointsSection').style.display = "block";
@@ -27,6 +25,7 @@ function updateGUI(step, step_text_content){
         document.getElementById("pointsText").style.display = "block";
 
         document.getElementById('outlineLoading').style.display = "block";
+        document.getElementById('outlineSection').style.display = "block";
 
     }else if (step == "outline"){
         document.getElementById("outlineText").style.display = "block";
@@ -44,7 +43,7 @@ export const getThesis = async (input_data) => {
         document.getElementById("submitButton").style.display = "none";
         document.getElementById('thesisSection').style.display = "block";
         document.getElementById('thesisLoading').style.display = "block";
-        const thesis_system_prompt = "You are an essay outlining expert, that can take in user inputs and craft a well written theis for an assignment."+format_instructions;
+        const thesis_system_prompt = "You are an essay outlining expert, that can take in user inputs and craft a well written theis for an assignment."+format_instructions_thesis;
         const thesis_user_prompt = "User inputs: "+ JSON.stringify(input_data)+". Please craft a thesis or main idea";
         //document.getElementById("progressBar").innerHTML = loadString("main idea");
         const raw_response = await chatGPT(thesis_system_prompt, thesis_user_prompt);
