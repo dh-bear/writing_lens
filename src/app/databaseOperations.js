@@ -6,7 +6,7 @@ function loadString(step){
 }
 
 const format_instructions_thesis = "";
-const format_instructions = "YOU ARE INJECTING AN 'innerHTML' tag, please respond in HTML";
+const format_instructions = "";
 
 
 function updateGUI(step, step_text_content){
