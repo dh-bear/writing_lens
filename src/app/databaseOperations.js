@@ -41,38 +41,39 @@ export const getThesis = async (input_data) => {
         document.getElementById("submitButton").style.display = "none";
         document.getElementById('thesisSection').style.display = "block";
         document.getElementById('thesisLoading').style.display = "block";
+        const inputString = JSON.stringify(input_data);
         const thesis_system_prompt = "You are an essay outlining expert, that can take in user inputs and craft a well written theis for an assignment."+format_instructions_thesis;
-        const thesis_user_prompt = "User inputs: "+ JSON.stringify(input_data)+". Please craft a thesis or main idea";
+        const thesis_user_prompt = "User inputs: "+ inputString+". Please craft a thesis or main idea";
         //document.getElementById("progressBar").innerHTML = loadString("main idea");
         const raw_response = await chatGPT(thesis_system_prompt, thesis_user_prompt);
         const response = JSON.stringify(raw_response);
         updateGUI("thesis", response);
-        getPoints(input_data, response);
+        getPoints(inputString, response);
     } catch (err) {
         console.error('An error occurred:', err);
     }
 }
 
 
-export const getPoints = async (input_data, thesis) => {
+export const getPoints = async (inputString, thesis) => {
     try{
-        const points_system_prompt = "You are an essay outlining expert, that can come up with supporting points to formulate an argument"+format_instructions;
-        const points_user_prompt = "Assignment: user_inputs:"+ JSON.stringify(input_data) +" please list 3-5 terse supporting ideas to support:"+thesis;
+        const points_system_prompt = "You are an essay outlining expert, that can come up with supporting points to formulate an argument";
+        const points_user_prompt = "Assignment: user_inputs:"+ inputString +" please list 3-5 terse supporting ideas to support the essay's main idea/thesis: "+thesis;
         //document.getElementById("progressBar").innerHTML = loadString("supporting points");
         const raw_response = await chatGPT(points_system_prompt, points_user_prompt);
         const response = JSON.stringify(raw_response);
         updateGUI("points", response);
         window.scrollBy(0, window.innerHeight/2);
 
-        getOutline(input_data, thesis, response);
+        getOutline(inputString, thesis, response);
     } catch (err) {
         console.error('An error occurred:', err);
     }
 }
-export const getOutline = async (input_data, thesis, points) => {
+export const getOutline = async (inputString, thesis, points) => {
     try{
         const outline_system_prompt = "You are an essay outlining expert. DO NOT CITE DIRECT SOURCES."+format_instructions;
-        const outline_user_prompt = "Assignment: user_inputs:"+ JSON.stringify(input_data) +" please craft an outline for an essay using these ideas"+points+" to support "+thesis;
+        const outline_user_prompt = "Assignment: user_inputs:"+ inputString +" please craft an outline for an essay using these ideas"+points+" to support "+thesis;
         //document.getElementById("progressBar").innerHTML = loadString("outline");
         const raw_response = await chatGPT(outline_system_prompt, outline_user_prompt);
         const response = JSON.stringify(raw_response);
