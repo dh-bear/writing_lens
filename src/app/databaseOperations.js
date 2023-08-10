@@ -36,8 +36,6 @@ function updateGUI(step, step_text_content){
     }
 }
 
-
-
 export const getThesis = async (input_data) => {
     try{
         document.getElementById("submitButton").style.display = "none";
@@ -56,10 +54,10 @@ export const getThesis = async (input_data) => {
 }
 
 
-export const getPoints = async (input_data, thesis_data) => {
+export const getPoints = async (input_data, thesis) => {
     try{
         const points_system_prompt = "You are an essay outlining expert, that can come up with supporting points to formulate an argument"+format_instructions;
-        const points_user_prompt = "Assignment: user_inputs:"+ JSON.stringify(input_data) +" please list 3-5 terse supporting ideas to support:"+thesis_data;
+        const points_user_prompt = "Assignment: user_inputs:"+ JSON.stringify(input_data) +" please list 3-5 terse supporting ideas to support:"+thesis;
         //document.getElementById("progressBar").innerHTML = loadString("supporting points");
         const raw_response = await chatGPT(points_system_prompt, points_user_prompt);
         const response = JSON.stringify(raw_response);
@@ -71,10 +69,10 @@ export const getPoints = async (input_data, thesis_data) => {
         console.error('An error occurred:', err);
     }
 }
-export const getOutline = async (input_data, thesis_data, points_data) => {
+export const getOutline = async (input_data, thesis_data, points) => {
     try{
         const outline_system_prompt = "You are an essay outlining expert. DO NOT CITE DIRECT SOURCES."+format_instructions;
-        const outline_user_prompt = "Assignment: user_inputs:"+ JSON.stringify(input_data) +" please craft an outline for an essay using these ideas"+JSON.stringify(points_data)+" to support "+thesis_data;
+        const outline_user_prompt = "Assignment: user_inputs:"+ JSON.stringify(input_data) +" please craft an outline for an essay using these ideas"+points+" to support "+thesis;
         //document.getElementById("progressBar").innerHTML = loadString("outline");
         const raw_response = await chatGPT(outline_system_prompt, outline_user_prompt);
         const response = JSON.stringify(raw_response);
