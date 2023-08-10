@@ -69,7 +69,7 @@ export const getPoints = async (input_data, thesis) => {
         console.error('An error occurred:', err);
     }
 }
-export const getOutline = async (input_data, thesis_data, points) => {
+export const getOutline = async (input_data, thesis, points) => {
     try{
         const outline_system_prompt = "You are an essay outlining expert. DO NOT CITE DIRECT SOURCES."+format_instructions;
         const outline_user_prompt = "Assignment: user_inputs:"+ JSON.stringify(input_data) +" please craft an outline for an essay using these ideas"+points+" to support "+thesis;
