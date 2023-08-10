@@ -64,7 +64,7 @@ export const getPoints = async (input_data, thesis) => {
         updateGUI("points", response);
         window.scrollBy(0, window.innerHeight/2);
 
-        getOutline(input_data, thesis_data, response);
+        getOutline(input_data, thesis, response);
     } catch (err) {
         console.error('An error occurred:', err);
     }
