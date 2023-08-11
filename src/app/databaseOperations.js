@@ -23,7 +23,6 @@ export const queueATest = async () => {
 
 
 
-
 function updateGUI(step, step_text_content){
     document.getElementById("progressBar").innerHTML = "<img src='./buddy.png' />";
     if (step == "thesis"){
@@ -61,7 +60,7 @@ export const getThesis = async (input_data) => {
         const thesis_system_prompt = "You are an essay outlining expert, that can take in user inputs and craft a well written thesis or maind for an assignment."+format_instructions_thesis;
         const thesis_user_prompt = "User inputs: "+ inputString+". Please craft a thesis or main idea";
         //document.getElementById("progressBar").innerHTML = loadString("main idea");
-        const raw_response = await chatGPT(thesis_system_prompt, thesis_user_prompt, total_length_thesis, 1);
+        const raw_response = await chatGPT(thesis_system_prompt, thesis_user_prompt, total_length_thesis);
         const response = JSON.stringify(raw_response);
         updateGUI("thesis", response);
         getPoints(inputString, response);
@@ -77,7 +76,7 @@ export const getPoints = async (inputString, thesis) => {
         const points_system_prompt = "You are an essay outlining expert, that can come up with supporting points to formulate an argument";
         const points_user_prompt = "Assignment: user_inputs:"+ inputString +" please list 3-5 terse supporting ideas to support the essay's main idea/thesis: "+thesis;
         //document.getElementById("progressBar").innerHTML = loadString("supporting points");
-        const raw_response = await chatGPT(points_system_prompt, points_user_prompt, points_max_tokens, 3);
+        const raw_response = await chatGPT(points_system_prompt, points_user_prompt, points_max_tokens);
         const response = JSON.stringify(raw_response);
         updateGUI("points", response);
         window.scrollBy(0, window.innerHeight/2);
@@ -93,7 +92,7 @@ export const getOutline = async (inputString, thesis, points) => {
         const outline_system_prompt = "You are an essay outlining expert. DO NOT CITE DIRECT SOURCES."+format_instructions;
         const outline_user_prompt = "Assignment: user_inputs:"+ inputString +" please craft an outline for an essay using these ideas"+points+" to support "+thesis;
         //document.getElementById("progressBar").innerHTML = loadString("outline");
-        const raw_response = await chatGPT(outline_system_prompt, outline_user_prompt, outline_max_tokens, 5);
+        const raw_response = await chatGPT(outline_system_prompt, outline_user_prompt, outline_max_tokens);
         const response = JSON.stringify(raw_response);
         updateGUI("outline", response);
 

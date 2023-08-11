@@ -1,39 +1,15 @@
 import supabase from './api/supabase';
 
 
-export async function chatGPT(system_msg, user_msg, max_tokens, steps) {
-    let fullResponse = ""; // Initialize essay outline as empty
-    let current_msg = user_msg;
-    let max_iterations = steps;
-    const curr_tokens_to_generate = Math.floor(max_tokens / max_iterations);
-
-    while (max_tokens > 0 && max_iterations > 0){
-      const res = await window.fetch('/api/openai', {
-        method: 'POST',
-        body: JSON.stringify({ userMessage: current_msg, systemMessage: system_msg, maxTokens: curr_tokens_to_generate})
-      });
-      const response = await res.json();
-      const generated_content = response.content;
-      const token_count = countTokens(generated_content);
-
-      max_tokens -= token_count;
-      fullResponse += generated_content;
-      current_msg = generated_content;
-      max_iterations--;
-      console.log(current_msg)
-      console.log(max_iterations)
-      // if (gptClassifier(fullResponse)){
-      //   break;
-      // }
-    }
-    fullResponse = fullResponse.replace(/\n/g, "<br />");
-    fullResponse = fullResponse.replace(/\\/g, '');
-    return fullResponse;
-}
-
-function countTokens(text){
-  return text.split(/\s+/).length;
-}
+export async function chatGPT(system_msg, user_msg, max_tokens) {
+    const res = await window.fetch('/api/openai', {
+      method: 'POST',
+      body: JSON.stringify({ userMessage: user_msg, systemMessage: system_msg, maxTokens: max_tokens})
+    });
+    const response = await res.json();
+    const generated_content = response.content.replace(/\n/g, "<br />");
+    return generated_content;
+  }
 
 export async function insertData(formData) {
     try {
