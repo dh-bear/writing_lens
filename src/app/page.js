@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { insertData } from './utils';
-import {getThesis, getPoints, getOutline} from './databaseOperations';
+import {getThesis, getPoints, getOutline, queueATest} from './databaseOperations';
 
 export default function Page() {
   const [topic, setTopic] = useState('');
@@ -11,6 +11,7 @@ export default function Page() {
   const [additional_features, setInstructions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
+  //queueATest();
 
   // TODO change the values back
   const handleSubmit = async (e) => {

@@ -7,7 +7,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-async function getChatResponse(userMessage, systemMessage) {
+async function getChatResponse(userMessage, systemMessage, maxTokens) {
     const completion = await openai.createChatCompletion({
       model: "gpt-4-32k",
       messages: [
@@ -15,6 +15,7 @@ async function getChatResponse(userMessage, systemMessage) {
         {"role": "user", "content": userMessage}
       ],
       temperature: 1,
+      max_tokens: maxTokens,
     });
 
     return completion.data.choices[0].message.content;
@@ -28,9 +29,9 @@ async function getChatResponse(userMessage, systemMessage) {
 // TODO ONLY SEND JSON OBJECT
 export async function POST(req) {
   // Extract the `messages` from the body of the request
-  const { userMessage, systemMessage } = await req.json()
+  const { userMessage, systemMessage, maxTokens } = await req.json()
 
-  const content = await getChatResponse(userMessage, systemMessage);
+  const content = await getChatResponse(userMessage, systemMessage, maxTokens);
 
   return new NextResponse(JSON.stringify({ content }));
 }
