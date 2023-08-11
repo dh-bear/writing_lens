@@ -10,11 +10,27 @@ export default function Page() {
   const [reference_piece, setReference] = useState('');
   const [additional_features, setInstructions] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
-  //queueATest();
+  const [otherEssayType, setOtherEssayType] = useState('');
+  const [isOtherSelected, setIsOtherSelected] = useState(false);
+  const [referenceOption, setReferenceOption] = useState('');
 
-  // TODO change the values back
-  const handleSubmit = async (e) => {
+  const handleReferenceChange = (e) => {
+    setReferenceOption(e.target.value);
+  };
+
+  const handleReferenceDetailChange = (e) => {
+    setReference(e.target.value);
+  };
+  
+  const handleNoneClick = () => {
+    setInstructions(' ');
+  };
+
+  const handleEssayTypeChange = (e) => {
+    setEssayType(e.target.value);
+    setIsOtherSelected(e.target.value === "Other");
+  };
+  const fastForwardTesting = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     const formData = {
@@ -23,6 +39,27 @@ export default function Page() {
       'essay_type': (essay_type == "") ? "Theme Analysis" : essay_type,
       'reference_piece': (reference_piece == "") ? "Great Gastby" : reference_piece,
       'additional_features': (additional_features == "") ? "Relate to the social disparities of the 1920s. Include a counterargument." : additional_features,
+    };
+
+    try{
+      insertData(formData);
+      getThesis(formData);
+      window.scrollTo(0, window.innerHeight*6);
+    }catch(e){
+      console.log("Error: ",e)
+    }
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const formData = {
+      'topic': topic,
+      'school_class': school_class,
+      'essay_type': essay_type,
+      'reference_piece': reference_piece,
+      'additional_features': additional_features,
     };
     try{
       insertData(formData);
@@ -51,9 +88,11 @@ export default function Page() {
     <div>
       {/* rest of your components */}
       <div className="floaterLogo">
-        <a href="https://apps.apple.com/us/app/studdy-ai-pocket-tutor/id6450114499">
+        {/*<a href="https://apps.apple.com/us/app/studdy-ai-pocket-tutor/id6450114499">
           <img src="/buddy.png" />
-        </a>
+        </a>*/}
+        <button onClick={fastForwardTesting}>Dev Test</button>
+        <p style={{fontSize: 20 + '%'}} >Select to generate inputs <br />and skip to testing</p>
       </div>
 
       <div id="floaterScroll" onClick={()=>window.scrollBy(0, window.innerHeight/2)}>
@@ -90,19 +129,60 @@ export default function Page() {
 
       <section>
         <h2>Choose Essay Type</h2>
-        <h3>"Theme Analysis", "Expository", "Character Analysis", "Persuasive</h3>
-        <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="ex: Theme Analysis" value={essay_type} onChange={(e) => setEssayType(e.target.value)} />
+        <h3>"Theme Analysis", "Expository", "Character Analysis", "Persuasive"</h3>
+        <form>
+          {/* include question mark explanation on hover */}
+            <select value={essay_type} onChange={handleEssayTypeChange}>
+                <optgroup label="General">
+                  <option value="" disabled>Select Essay Type</option>
+                  <option value="Persuasive">Persuasive</option>
+                  <option value="Expository">Expository</option>
+                  <option value="Compare and Contrast">Compare and Contrast</option>
+                  <option value="Narrative">Narrative Essay</option>
+                  <option value="Descriptive">Descriptive Essay</option>
+                </optgroup>
+                <optgroup label='Literature'>
+                  <option value="Theme Analysis">Theme Analysis</option>
+                  <option value="Character Analysis">Character Analysis</option>
+                  <option value="Dramatic Analysis">Dramatic Analysis</option>
+                  <option value="Poetic Analysis">Poetic Analysis</option>
+                </optgroup>
+                <option value="Other">Other</option>
+            </select>
+            {isOtherSelected && (
+                  <input type="text"
+                     placeholder="Please Specify"
+                     value={otherEssayType}
+                     onChange={(e) => setOtherEssayType(e.target.value)}
+                  />
+                )}
         </form>
-        {/* examples and so on */}
       </section>
 
       <section>
         <h2>Select Reference Material</h2>
-        <h3>Please refer to the name of the book, article, or passage that will be used as source material for the writing process</h3>
-        <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="ex: Great Gatsby" value={reference_piece} onChange={(e) => setReference(e.target.value)} />
-        </form>
+        <h3>Please select the type of source material used to direct this essay outline.</h3>
+        <h4>Per your selection, you may need to include specification</h4>
+        <form className="refForm"onSubmit={handleSubmit}>
+          <select value={referenceOption} onChange={handleReferenceChange}>
+              <option value="">Select Option</option>
+              <optgroup label="Select By Name">
+                <option value="Article">Article</option>
+                <option value="Book">Book</option>
+                <option value="Writing Passage">Writing Passage</option>
+              </optgroup>
+              <option value="Paste Reference Text">Paste Reference Text</option>
+              <option value=" ">None</option>
+          </select>
+          {(referenceOption === 'Paste Reference Text' || ['Article', 'Book', 'Writing Passage'].includes(referenceOption)) && 
+            <input 
+              type="text" 
+              placeholder="Please refer to the name of the book, article, or passage" 
+              value={reference_piece} 
+              onChange={handleReferenceDetailChange}
+            />
+          }
+          </form>
         {/* examples and so on */}
       </section>
 
@@ -111,6 +191,7 @@ export default function Page() {
         <h3>Please include any further instruction to help direct the writing process for this assignment</h3>
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="ex: Relate to the social disparities of the 1920s. Include a counterargument." value={additional_features} onChange={(e) => setInstructions(e.target.value)} />
+          <button className="noneButton" type="button" onClick={handleNoneClick}>None</button>
         </form>
         {/* examples and so on */}
       </section>
