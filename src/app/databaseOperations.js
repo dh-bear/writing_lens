@@ -7,9 +7,9 @@ function loadString(step){
 
 const format_instructions_thesis = "PLEASE ATTACH <END> to the end of the sentences that make up the main idea.";
 const format_instructions = "";
-const total_length_thesis = 256;
-const total_length_points = 700;
-const total_length_outline = 900;
+const total_length_thesis = 200;
+const total_length_points = 500;
+const total_length_outline = 700;
 
 export const queueATest = async () => {
     console.log("Loading");
@@ -93,7 +93,7 @@ export const getOutline = async (inputString, thesis, points) => {
         const outline_system_prompt = "You are an essay outlining expert. DO NOT CITE DIRECT SOURCES."+format_instructions;
         const outline_user_prompt = "Assignment: user_inputs:"+ inputString +" please craft an outline for an essay using these ideas"+points+" to support "+thesis;
         //document.getElementById("progressBar").innerHTML = loadString("outline");
-        const raw_response = await chatGPT(outline_system_prompt, outline_user_prompt, outline_max_tokens, 3);
+        const raw_response = await chatGPT(outline_system_prompt, outline_user_prompt, outline_max_tokens, 5);
         const response = JSON.stringify(raw_response);
         updateGUI("outline", response);
 
