@@ -37,7 +37,7 @@ export default function Page() {
       'topic': (topic == "") ? "Is the American Dream Possible? Did Gatsby achieve this?" : topic,
       'school_class': (school_class == "") ? "AP Lit" : school_class,
       'essay_type': (essay_type == "") ? "Theme Analysis" : essay_type,
-      'reference_piece': (reference_piece == "") ? "Great Gastby" : reference_piece,
+      'reference_piece': (reference_piece == "") ? "Great Gastby" : "The " + referenceOption + " "+ reference_piece,
       'additional_features': (additional_features == "") ? "Relate to the social disparities of the 1920s. Include a counterargument." : additional_features,
     };
 
@@ -50,7 +50,6 @@ export default function Page() {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -58,10 +57,11 @@ export default function Page() {
       'topic': topic,
       'school_class': school_class,
       'essay_type': essay_type,
-      'reference_piece': reference_piece,
+      'reference_piece': "The " + referenceOption + " "+ reference_piece,
       'additional_features': additional_features,
     };
     try{
+      
       insertData(formData);
       getThesis(formData);
     }catch(e){
@@ -92,7 +92,7 @@ export default function Page() {
           <img src="/buddy.png" />
         </a>*/}
         <button onClick={fastForwardTesting}>Dev Test</button>
-        <p style={{fontSize: 20 + '%'}} >Select to generate inputs <br />and skip to testing</p>
+        <p style={{fontSize: 20 + '%'}} >Select to generate and submit inputs <br /> using a preloaded assignment</p>
       </div>
 
       <div id="floaterScroll" onClick={()=>window.scrollBy(0, window.innerHeight/2)}>
@@ -107,9 +107,11 @@ export default function Page() {
         <h1>Writing Lens</h1>
         <p><b>Daniel Hadar, StuddyAI Inc.</b></p>
         <p><b>A Full-Stack Prototype</b></p>
+        <p>React, Next.JS, PostgreSQL, OpenAI, CSS</p>
       </div>
 
       <section>
+        <p className='stepLabel'>1/5</p>
         <h2>What is the topic of your essay?</h2>
         <h3>The main question it should answer</h3>
         <form onSubmit={handleSubmit}>
@@ -119,6 +121,7 @@ export default function Page() {
       </section>
 
       <section>
+        <p className='stepLabel'>2/5</p>
         <h2>What class is this for?</h2>
         <h3>e.g., "AP COMP", "class about biology", "8th grade history"</h3>
         <form onSubmit={handleSubmit}>
@@ -128,6 +131,7 @@ export default function Page() {
       </section>
 
       <section>
+        <p className='stepLabel'>3/5</p>
         <h2>Choose Essay Type</h2>
         <h3>"Theme Analysis", "Expository", "Character Analysis", "Persuasive"</h3>
         <form>
@@ -160,6 +164,7 @@ export default function Page() {
       </section>
 
       <section>
+        <p className='stepLabel'>4/5</p>
         <h2>Select Reference Material</h2>
         <h3>Please select the type of source material used to direct this essay outline.</h3>
         <h4>Per your selection, you may need to include specification</h4>
@@ -174,12 +179,18 @@ export default function Page() {
               <option value="Paste Reference Text">Paste Reference Text</option>
               <option value=" ">None</option>
           </select>
-          {(referenceOption === 'Paste Reference Text' || ['Article', 'Book', 'Writing Passage'].includes(referenceOption)) && 
+          {['Article', 'Book', 'Writing Passage'].includes(referenceOption) && 
             <input 
-              type="text" 
-              placeholder="Please refer to the name of the book, article, or passage" 
+              type="text"
+              placeholder="Please paste text or input the name of source to reference" 
               value={reference_piece} 
               onChange={handleReferenceDetailChange}
+            />
+          }
+          {(referenceOption === 'Paste Reference Text') && 
+            <textarea
+              value={reference_piece} // ...force the input's value to match the state variable...
+              onChange={handleReferenceDetailChange} // ... and update the state variable on any edits!
             />
           }
           </form>
@@ -187,6 +198,7 @@ export default function Page() {
       </section>
 
       <section>
+        <p className='stepLabel'>5/5</p>
         <h2>Any additional instructions or information</h2>
         <h3>Please include any further instruction to help direct the writing process for this assignment</h3>
         <form onSubmit={handleSubmit}>

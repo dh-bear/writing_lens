@@ -38,6 +38,26 @@ h3 {
 .floaterLogo img{
   height: 10vh;
 }
+.floaterLogo button{
+  padding: 10px 10px;
+  border-radius: 5px;
+  background-color: var(--yellow_transparent);
+  cursor: pointer;
+  border: 1px solid var(--secondary);
+}
+.floaterLogo button:hover{
+  /*padding: 11px 11px;*/
+  background-color: var(--accent);
+  color: var(--primary);
+  box-shadow: inset 0px 0px 5px blue;
+}
+.floaterLogo button:active{
+  /*padding: 11px 11px;*/
+  background-color: var(--yellow);
+  color: var(--primary);
+  box-shadow: inset 0px 0px 5px blue;
+}
+
 #progressBar{
   position: fixed;
   top: 5%;
@@ -108,7 +128,7 @@ section p{
   padding: 8px 8px;
 }
 
-section input, section select {
+section input, section select, section textarea {
   width: 80%;
   font-size: 150%;
   color: rgb(0, 0, 0);
@@ -280,4 +300,11 @@ footer > *:hover{
   font: inherit;
   cursor: pointer;
   margin-left: 15px;
+}
+
+.stepLabel{
+  color: var(--accent);
+  background-color: inherit;
+  text-align: left;
+  font-weight: bold;
 }
