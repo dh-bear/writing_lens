@@ -1,10 +1,10 @@
 import supabase from './api/supabase';
 
 
-export async function chatGPT(system_msg, user_msg, max_tokens) {
+export async function chatGPT(system_msg, user_msg, max_tokens, steps) {
     let fullResponse = ""; // Initialize essay outline as empty
     let current_msg = user_msg;
-    let max_iterations = 3;
+    let max_iterations = steps;
     const curr_tokens_to_generate = Math.floor(max_tokens / max_iterations);
 
     while (max_tokens > 0 && max_iterations > 0){
@@ -21,9 +21,10 @@ export async function chatGPT(system_msg, user_msg, max_tokens) {
       current_msg = generated_content;
       max_iterations--;
       console.log(current_msg)
-      if (gptClassifier(fullResponse)){
-        break;
-      }
+      console.log(max_iterations)
+      // if (gptClassifier(fullResponse)){
+      //   break;
+      // }
     }
     fullResponse = fullResponse.replace(/\n/g, "<br />");
     fullResponse = fullResponse.replace(/\\/g, '');
