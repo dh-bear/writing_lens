@@ -28,6 +28,7 @@ function updateGUI(step, step_text_content){
         document.getElementById('thesisLoading').style.display = "none";
         document.getElementById("thesisText").innerHTML = step_text_content;
         document.getElementById("thesisText").style.display = "block";
+        document.getElementById("copyThesis").style.display = "block";
 
         document.getElementById('pointsSection').style.display = "block";
         document.getElementById('pointsLoading').style.display = "block";
@@ -36,6 +37,8 @@ function updateGUI(step, step_text_content){
         document.getElementById('pointsLoading').style.display = "none";
         document.getElementById("pointsText").innerHTML = step_text_content;
         document.getElementById("pointsText").style.display = "block";
+        document.getElementById("copyPoints").style.display = "block";
+
 
         document.getElementById('outlineLoading').style.display = "block";
         document.getElementById('outlineSection').style.display = "block";
@@ -45,6 +48,7 @@ function updateGUI(step, step_text_content){
         document.getElementById('outlineLoading').style.display = "none";
         document.getElementById('outlineSection').style.display = "block";
         document.getElementById("outlineText").innerHTML = step_text_content;
+        document.getElementById("copyOutline").style.display = "block";
 
     }
 }

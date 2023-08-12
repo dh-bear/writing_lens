@@ -84,6 +84,12 @@ export default function Page() {
     window.addEventListener('scroll', handleScroll);
   });
 
+  function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
   return (
     <div>
       {/* rest of your components */}
@@ -219,6 +225,9 @@ export default function Page() {
           <img src='https://emoji.slack-edge.com/T051NFX029F/studdyhappyparty/c79fcac2d48dea37.gif' />
           <h4>Loading...</h4>
         </div>
+        <button id="copyThesis" onClick={() => {navigator.clipboard.writeText(document.getElementById("thesisText").innerHTML);
+        document.getElementById("copyThesis").innerText="Copied!";
+        }}>Copy to Clipboard</button>
         <p id="thesisText"></p>
       </section>
 
@@ -228,6 +237,9 @@ export default function Page() {
           <img src='https://emoji.slack-edge.com/T051NFX029F/studdyhappyparty/c79fcac2d48dea37.gif' />
           <h4>Loading...</h4>
         </div>
+        <button id="copyPoints" onClick={() => {navigator.clipboard.writeText(document.getElementById("pointsText").innerHTML);
+        document.getElementById("copyPoints").innerText="Copied!";
+        }}>Copy to Clipboard</button>
         <p id="pointsText"></p>
       </section>
 
@@ -237,6 +249,9 @@ export default function Page() {
           <img src='https://emoji.slack-edge.com/T051NFX029F/studdyhappyparty/c79fcac2d48dea37.gif' />
           <h4>Loading...</h4>
         </div>
+        <button id="copyOutline" onClick={() => {navigator.clipboard.writeText(document.getElementById("outlineText").innerHTML);
+        document.getElementById("copyOutline").innerText="Copied!";
+        }}>Copy to Clipboard</button>
         <p id="outlineText"></p>
       </section>
       

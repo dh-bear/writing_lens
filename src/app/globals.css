@@ -234,6 +234,9 @@ footer > *:hover{
 #thesisSection h3{
   color: var(--accent);
 }
+#thesisSection button{
+  display: none;
+}
 
 #pointsSection{
   display: none;
@@ -241,12 +244,18 @@ footer > *:hover{
 #pointsSection h3{
   color: var(--accent);
 }
+#pointsSection button{
+  display: none;
+}
 
 #outlineSection{
   display: none;
 }
 #outlineSection h3{
   color: var(--accent);
+}
+#outlineSection button{
+  display: none;
 }
 
 #thesisText{
