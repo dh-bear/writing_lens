@@ -92,7 +92,7 @@ export default function Page() {
           <img src="/buddy.png" />
         </a>*/}
         <button onClick={fastForwardTesting}>Dev Test</button>
-        <p style={{fontSize: 20 + '%'}} >Select to generate and submit inputs <br /> using a preloaded assignment</p>
+        <p>Select to generate and submit inputs <br /> using a preloaded assignment</p>
       </div>
 
       <div id="floaterScroll" onClick={()=>window.scrollBy(0, window.innerHeight/2)}>
@@ -201,7 +201,7 @@ export default function Page() {
         <p className='stepLabel'>5/5</p>
         <h2>Any additional instructions or information</h2>
         <h3>Please include any further instruction to help direct the writing process for this assignment</h3>
-        <form onSubmit={handleSubmit}>
+        <form id="additional" onSubmit={handleSubmit}>
           <input type="text" placeholder="ex: Relate to the social disparities of the 1920s. Include a counterargument." value={additional_features} onChange={(e) => setInstructions(e.target.value)} />
           <button className="noneButton" type="button" onClick={handleNoneClick}>None</button>
         </form>

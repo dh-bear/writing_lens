@@ -1,0 +1,6 @@
+@media screen and (orientation:portrait) {
+   :root{
+    --primary: red;
+    background-color: var(--primary);
+   } 
+}
